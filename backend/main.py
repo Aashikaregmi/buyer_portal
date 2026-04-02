@@ -27,6 +27,7 @@ app = FastAPI(
     description="A real-estate buyer portal with auth and favourites",
     version="1.0.0",
     lifespan=lifespan,
+    redirect_slashes=False,
 )
 
 app.add_middleware(
