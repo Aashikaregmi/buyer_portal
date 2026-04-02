@@ -98,6 +98,7 @@ export default function Favourites() {
               bedrooms={prop.bedrooms}
               bathrooms={prop.bathrooms}
               isFavourited={true}
+              variant="favourite"
               onToggleFavourite={() => removeFavourite(prop)}
             />
           ))}

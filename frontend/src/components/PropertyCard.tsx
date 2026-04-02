@@ -1,3 +1,5 @@
+import { Trash2 } from "lucide-react";
+
 interface PropertyCardProps {
   id: string;
   title: string;
@@ -8,6 +10,7 @@ interface PropertyCardProps {
   bathrooms?: number;
   isFavourited: boolean;
   onToggleFavourite: () => void;
+  variant?: "default" | "favourite";
 }
 
 export default function PropertyCard({
@@ -19,6 +22,7 @@ export default function PropertyCard({
   bathrooms,
   isFavourited,
   onToggleFavourite,
+  variant = "default",
 }: PropertyCardProps) {
   return (
     <div className="group rounded-xl border border-white/10 bg-slate-900 overflow-hidden transition-all hover:border-white/20 hover:shadow-lg hover:shadow-black/20">
@@ -28,16 +32,25 @@ export default function PropertyCard({
           alt={title}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <button
-          onClick={onToggleFavourite}
-          className={`absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center text-lg transition-all ${
-            isFavourited
-              ? "bg-red-500 text-white"
-              : "bg-black/40 text-white/80 hover:bg-black/60 hover:text-white backdrop-blur-sm"
-          }`}
-        >
-          {isFavourited ? "♥" : "♡"}
-        </button>
+        {variant === "favourite" ? (
+          <button
+            onClick={onToggleFavourite}
+            className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center bg-red-500/80 text-white hover:bg-red-600 backdrop-blur-sm transition-all"
+          >
+            <Trash2 className="size-4" />
+          </button>
+        ) : (
+          <button
+            onClick={onToggleFavourite}
+            className={`absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center text-lg transition-all ${
+              isFavourited
+                ? "bg-red-500 text-white"
+                : "bg-black/40 text-white/80 hover:bg-black/60 hover:text-white backdrop-blur-sm"
+            }`}
+          >
+            {isFavourited ? "♥" : "♡"}
+          </button>
+        )}
       </div>
       <div className="p-4 space-y-2">
         <h3 className="text-white font-semibold text-lg leading-tight">{title}</h3>

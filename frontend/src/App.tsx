@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Favourites from "./pages/Favourites";
 import Landing from "./pages/Landing";
+import { Footer } from "./components/ui/footer-section";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/favourites" element={<Favourites />} />
         </Routes>
+        <Footer />
       </AuthProvider>
     </BrowserRouter>
   );

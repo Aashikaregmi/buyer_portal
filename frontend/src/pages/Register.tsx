@@ -9,6 +9,7 @@ import { ImageSlider } from "@/components/ui/image-slider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Eye, EyeOff } from "lucide-react";
 
 const propertyImages = [
   "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&auto=format&fit=crop",
@@ -48,6 +49,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -146,15 +148,24 @@ export default function Register() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-gray-300">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Min 8 chars, 1 number, 1 special"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="bg-slate-800 border-slate-700 text-white placeholder:text-gray-500"
-                />
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Min 8 chars, 1 number, 1 special"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    className="bg-slate-800 border-slate-700 text-white placeholder:text-gray-500 pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                  >
+                    {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                  </button>
+                </div>
               </div>
               <Button type="submit" className="w-full bg-white text-black hover:bg-gray-200" disabled={loading}>
                 {loading ? "Creating..." : "Create Account"}
