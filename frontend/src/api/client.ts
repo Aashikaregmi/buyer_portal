@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: import.meta.env.DEV ? "http://localhost:8000" : "https://buyer-portal-aasignment.vercel.app/_/backend",
 });
 
 api.interceptors.request.use((config) => {
