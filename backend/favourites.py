@@ -8,7 +8,7 @@ from datetime import datetime
 router = APIRouter(prefix="/favourites", tags=["Favourites"])
 
 
-@router.get("/", response_model=list[FavouriteResponse])
+@router.get("", response_model=list[FavouriteResponse])
 async def get_favourites(current_user: dict = Depends(get_current_user)):
     favourites = []
     cursor = favourites_collection.find({"user_id": current_user["id"]})
@@ -23,7 +23,7 @@ async def get_favourites(current_user: dict = Depends(get_current_user)):
     return favourites
 
 
-@router.post("/", response_model=FavouriteResponse)
+@router.post("", response_model=FavouriteResponse)
 async def add_favourite(fav_data: FavouriteAdd, current_user: dict = Depends(get_current_user)):
     existing = await favourites_collection.find_one({
         "user_id": current_user["id"],

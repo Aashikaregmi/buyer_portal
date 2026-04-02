@@ -5,7 +5,7 @@ from models import PropertyResponse
 router = APIRouter(prefix="/properties", tags=["Properties"])
 
 
-@router.get("/", response_model=list[PropertyResponse])
+@router.get("", response_model=list[PropertyResponse])
 async def get_properties():
     properties = []
     cursor = properties_collection.find()
