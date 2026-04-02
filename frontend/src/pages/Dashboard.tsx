@@ -25,7 +25,7 @@ interface Favourite {
 }
 
 export default function Dashboard() {
-  const { user, logout, isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [properties, setProperties] = useState<Property[]>([]);
   const [favourites, setFavourites] = useState<Favourite[]>([]);
@@ -86,77 +86,29 @@ export default function Dashboard() {
     }
   };
 
-  const handleLogout = () => {
-    logout();
-    toast.success("Logged out");
-    navigate("/login");
-  };
-
   if (loading) return <div className="loading">Loading...</div>;
 
   return (
-    <div className="dashboard">
-      <header className="dashboard-header">
-        <div>
-          <h1>Welcome, {user?.fullName}</h1>
-          <span className="role-badge">{user?.role}</span>
-        </div>
-        <button onClick={handleLogout} className="logout-btn">
-          Logout
-        </button>
-      </header>
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-white mb-2">All Properties</h1>
+      <p className="text-gray-400 mb-8">{properties.length} listings available</p>
 
-      <section>
-        <h2>My Favourites ({favourites.length})</h2>
-        {favourites.length === 0 ? (
-          <p className="empty-message">
-            No favourites yet. Browse properties below and click the heart!
-          </p>
-        ) : (
-          <div className="property-grid">
-            {favourites.map((fav) => (
-              <PropertyCard
-                key={fav.id}
-                id={fav.property_id}
-                title={fav.property_name}
-                image_url={fav.image_url}
-                isFavourited={true}
-                onToggleFavourite={() =>
-                  toggleFavourite({
-                    id: fav.property_id,
-                    title: fav.property_name,
-                    image_url: fav.image_url,
-                    price: 0,
-                    location: "",
-                    bedrooms: 0,
-                    bathrooms: 0,
-                  })
-                }
-              />
-            ))}
-          </div>
-        )}
-      </section>
-
-      <section>
-        <h2>All Properties</h2>
-        <div className="property-grid">
-          {properties.map((prop) => (
-            <PropertyCard
-              key={prop.id}
-              id={prop.id}
-              title={prop.title}
-              image_url={prop.image_url}
-              price={prop.price}
-              location={prop.location}
-              bedrooms={prop.bedrooms}
-              bathrooms={prop.bathrooms}
-              isFavourited={isFavourited(prop.id)}
-              onToggleFavourite={() => toggleFavourite(prop)}
-            />
-          ))}
-        </div>
-      </section>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {properties.map((prop) => (
+          <PropertyCard
+            key={prop.id}
+            id={prop.id}
+            title={prop.title}
+            image_url={prop.image_url}
+            price={prop.price}
+            location={prop.location}
+            bedrooms={prop.bedrooms}
+            bathrooms={prop.bathrooms}
+            isFavourited={isFavourited(prop.id)}
+            onToggleFavourite={() => toggleFavourite(prop)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
