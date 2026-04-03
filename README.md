@@ -34,4 +34,4 @@ A full-stack real estate buyer portal where users can browse property listings, 
 
 ## Entity Relationship Diagram
 
-![Entity Relationship Diagram](erd.png)
+![Entity Relationship Diagram](./erd.png)
