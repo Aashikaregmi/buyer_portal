@@ -2,6 +2,8 @@
 
 A full-stack real estate buyer portal where users can browse property listings, create accounts, and save their favourite properties. Built with FastAPI, MongoDB, React, and TypeScript.
 
+**Live Demo:** [buyer-portal-aasignment.vercel.app](https://buyer-portal-aasignment.vercel.app)
+
 ## Tech Stack
 
 **Backend:** FastAPI, MongoDB (Motor async driver), JWT authentication, Bcrypt password hashing, Pydantic  
